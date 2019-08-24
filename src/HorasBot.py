@@ -69,7 +69,7 @@ class HorasBot(commands.Cog):
             if await self.conexao.queryRegistro("SELECT EXISTS(SELECT 1 FROM usuario WHERE id={})".format(message.author.id)):
                 await self.mostrarTempo(False, message, message.author)
             else:
-                await message.send(message.channel, 'Você não tem horas registradas')
+                await message.send('Você não tem horas registradas')
 
 
     async def mostrarTempo(self, flag, message, member):
@@ -84,9 +84,9 @@ class HorasBot(commands.Cog):
                 )
                 if(result[0][2]):
                     embed.set_thumbnail(url="{}".format(result[0][2]))
-                await message.send(message.channel, embed=embed)
+                await message.send(embed=embed)
             else:
-                await message.send(message.channel, '{} não tem horas registradas'.format(member.nick))
+                await message.send('{} não tem horas registradas'.format(member.nick))
         else:
             result = await self.conexao.queryAll("SELECT nome, minutos, urlavatar FROM usuario WHERE id={}".format(member.id))
             embed = discord.Embed(
@@ -97,7 +97,7 @@ class HorasBot(commands.Cog):
             )
             if(result[0][2]):
                     embed.set_thumbnail(url="{}".format(result[0][2]))
-            await message.send(message.channel, embed=embed)
+            await message.send(embed=embed)
 
 
 def setup(bot):
